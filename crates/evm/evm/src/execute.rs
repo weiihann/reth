@@ -752,6 +752,7 @@ mod tests {
             code_hash: KECCAK_EMPTY,
             code: None,
             account_id: None,
+            code_size: None,
         };
         state.insert_account(addr, account_info);
         state
@@ -794,6 +795,7 @@ mod tests {
             code_hash: KECCAK_EMPTY,
             code: None,
             account_id: None,
+            code_size: None,
         };
         state.insert_account(addr2, account2);
 
@@ -821,6 +823,7 @@ mod tests {
             code_hash: KECCAK_EMPTY,
             code: None,
             account_id: None,
+            code_size: None,
         };
         state.insert_account(addr2, account2);
 

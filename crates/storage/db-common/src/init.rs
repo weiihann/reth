@@ -338,12 +338,13 @@ where
     let mut storage_states = HashMap::new();
 
     for (address, account) in alloc {
-        let bytecode_hash = if let Some(code) = &account.code {
+        let (bytecode_hash, code_size) = if let Some(code) = &account.code {
             match Bytecode::new_raw_checked(code.clone()) {
                 Ok(bytecode) => {
                     let hash = bytecode.hash_slow();
+                    let code_size = bytecode.len() as u64;
                     contracts.insert(hash, bytecode);
-                    Some(hash)
+                    (Some(hash), code_size)
                 }
                 Err(err) => {
                     error!(%address, %err, "Failed to decode genesis bytecode.");
@@ -351,7 +352,7 @@ where
                 }
             }
         } else {
-            None
+            (None, 0)
         };
 
         let hashed_address = keccak256(address);
@@ -399,6 +400,7 @@ where
                     nonce: account.nonce.unwrap_or_default(),
                     balance: account.balance,
                     bytecode_hash,
+                    code_size,
                 }),
                 storage,
             ),
@@ -471,12 +473,13 @@ where
         B256Map::with_capacity_and_hasher(capacity, Default::default());
 
     for (address, account) in alloc {
-        let bytecode_hash = if let Some(code) = &account.code {
+        let (bytecode_hash, code_size) = if let Some(code) = &account.code {
             match Bytecode::new_raw_checked(code.clone()) {
                 Ok(bytecode) => {
                     let hash = bytecode.hash_slow();
+                    let code_size = bytecode.len() as u64;
                     contracts.insert(hash, bytecode);
-                    Some(hash)
+                    (Some(hash), code_size)
                 }
                 Err(err) => {
                     error!(%address, %err, "Failed to decode genesis bytecode.");
@@ -484,7 +487,7 @@ where
                 }
             }
         } else {
-            None
+            (None, 0)
         };
 
         // get state
@@ -514,6 +517,7 @@ where
                     nonce: account.nonce.unwrap_or_default(),
                     balance: account.balance,
                     bytecode_hash,
+                    code_size,
                 }),
                 storage,
             ),
@@ -870,22 +874,24 @@ fn write_account_to_db<TX: DbTxMut>(
     history_list: &IntegerList,
     seen_bytecodes: &mut B256Set,
 ) -> Result<(), eyre::Error> {
-    let bytecode_hash = if let Some(code) = &genesis_account.code {
+    let (bytecode_hash, code_size) = if let Some(code) = &genesis_account.code {
         let bytecode = Bytecode::new_raw_checked(code.clone())
             .map_err(|e| eyre::eyre!("Invalid bytecode for {address}: {e}"))?;
         let hash = bytecode.hash_slow();
+        let code_size = bytecode.len() as u64;
         if seen_bytecodes.insert(hash) {
             tx.put::<tables::Bytecodes>(hash, bytecode)?;
         }
-        Some(hash)
+        (Some(hash), code_size)
     } else {
-        None
+        (None, 0)
     };
 
     let account = Account {
         nonce: genesis_account.nonce.unwrap_or_default(),
         balance: genesis_account.balance,
         bytecode_hash,
+        code_size,
     };
 
     let hashed_address = keccak256(address);
@@ -1125,7 +1131,7 @@ mod tests {
     };
     use reth_provider::{
         test_utils::{create_test_provider_factory_with_chain_spec, MockNodeTypesWithDB},
-        ProviderFactory, RocksDBProviderFactory,
+        AccountReader, ProviderFactory, RocksDBProviderFactory,
     };
     use std::{collections::BTreeMap, sync::Arc};
 
@@ -1270,6 +1276,44 @@ mod tests {
             };
             assert_eq!(accounts, expected_accounts);
             assert_eq!(storages, expected_storages);
+        }
+    }
+
+    #[test]
+    fn insert_state_records_code_size() {
+        let contract = Address::with_last_byte(1);
+        let delegated = Address::with_last_byte(2);
+        let eoa = Address::with_last_byte(3);
+        let contract_code = alloy_primitives::Bytes::from_static(&[0x60, 0x01, 0x60, 0x00, 0x55]);
+        let mut designator = vec![0xef, 0x01, 0x00];
+        designator.extend_from_slice(Address::with_last_byte(9).as_slice());
+        let chain_spec = Arc::new(ChainSpec {
+            chain: Chain::from_id(1),
+            genesis: Genesis {
+                alloc: BTreeMap::from([
+                    (contract, GenesisAccount::default().with_code(Some(contract_code.clone()))),
+                    (delegated, GenesisAccount::default().with_code(Some(designator.into()))),
+                    (eoa, GenesisAccount { balance: U256::from(1), ..Default::default() }),
+                ]),
+                ..Default::default()
+            },
+            hardforks: Default::default(),
+            paris_block_and_final_difficulty: None,
+            deposit_contract: None,
+            ..Default::default()
+        });
+
+        for settings in [StorageSettings::v1(), StorageSettings::v2()] {
+            let factory = create_test_provider_factory_with_chain_spec(chain_spec.clone());
+            init_genesis_with_settings(&factory, settings).unwrap();
+            let provider = factory.provider().unwrap();
+
+            let stored = provider.basic_account(&contract).unwrap().unwrap();
+            assert_eq!(stored.bytecode_hash, Some(keccak256(&contract_code)));
+            assert_eq!(stored.code_size, contract_code.len() as u64);
+
+            assert_eq!(provider.basic_account(&delegated).unwrap().unwrap().code_size, 23);
+            assert_eq!(provider.basic_account(&eoa).unwrap().unwrap().code_size, 0);
         }
     }
 
