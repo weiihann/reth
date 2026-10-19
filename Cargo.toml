@@ -719,13 +719,13 @@ reth-metrics = { path = "crates/metrics" }
 # `Account::code_size` from weiihann/reth-core. The three revm crates move
 # together, and so do the five reth-core crates, so no type is split.
 [patch.crates-io]
-revm-state = { git = "https://github.com/weiihann/revm", rev = "530c04490021820932bba7deb816cd80258ea3c9" }
-revm-bytecode = { git = "https://github.com/weiihann/revm", rev = "530c04490021820932bba7deb816cd80258ea3c9" }
-revm-primitives = { git = "https://github.com/weiihann/revm", rev = "530c04490021820932bba7deb816cd80258ea3c9" }
+revm-state = { git = "https://github.com/weiihann/revm", rev = "3d1e65acb35a17f3f388ac31eb56fb3cbf9b0b8b" }
+revm-bytecode = { git = "https://github.com/weiihann/revm", rev = "3d1e65acb35a17f3f388ac31eb56fb3cbf9b0b8b" }
+revm-primitives = { git = "https://github.com/weiihann/revm", rev = "3d1e65acb35a17f3f388ac31eb56fb3cbf9b0b8b" }
 
 [patch."https://github.com/bnb-chain/reth-core.git"]
-reth-codecs = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
-reth-codecs-derive = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
-reth-primitives-traits = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
-reth-rpc-traits = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
-reth-zstd-compressors = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
+reth-codecs = { git = "https://github.com/weiihann/reth-core.git", rev = "f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c" }
+reth-codecs-derive = { git = "https://github.com/weiihann/reth-core.git", rev = "f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c" }
+reth-primitives-traits = { git = "https://github.com/weiihann/reth-core.git", rev = "f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c" }
+reth-rpc-traits = { git = "https://github.com/weiihann/reth-core.git", rev = "f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c" }
+reth-zstd-compressors = { git = "https://github.com/weiihann/reth-core.git", rev = "f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c" }
