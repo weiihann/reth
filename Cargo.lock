@@ -7784,7 +7784,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs"
 version = "0.3.1"
-source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
+source = "git+https://github.com/weiihann/reth-core.git?rev=f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c#f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c"
 dependencies = [
  "alloy-consensus",
  "alloy-eips 2.0.4",
@@ -7804,7 +7804,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs-derive"
 version = "0.3.1"
-source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
+source = "git+https://github.com/weiihann/reth-core.git?rev=f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c#f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -9501,7 +9501,7 @@ dependencies = [
 [[package]]
 name = "reth-primitives-traits"
 version = "0.3.1"
-source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
+source = "git+https://github.com/weiihann/reth-core.git?rev=f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c#f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c"
 dependencies = [
  "alloy-consensus",
  "alloy-eips 2.0.4",
@@ -10051,7 +10051,7 @@ dependencies = [
 [[package]]
 name = "reth-rpc-traits"
 version = "0.3.1"
-source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
+source = "git+https://github.com/weiihann/reth-core.git?rev=f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c#f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c"
 dependencies = [
  "alloy-consensus",
  "alloy-network",
@@ -10587,7 +10587,7 @@ dependencies = [
 [[package]]
 name = "reth-zstd-compressors"
 version = "0.3.1"
-source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
+source = "git+https://github.com/weiihann/reth-core.git?rev=f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c#f8dcd0e163b460a4eb4c74eddd2b7c03c4638e1c"
 dependencies = [
  "zstd",
 ]
@@ -10614,7 +10614,7 @@ dependencies = [
 [[package]]
 name = "revm-bytecode"
 version = "10.0.0"
-source = "git+https://github.com/weiihann/revm?rev=530c04490021820932bba7deb816cd80258ea3c9#530c04490021820932bba7deb816cd80258ea3c9"
+source = "git+https://github.com/weiihann/revm?rev=3d1e65acb35a17f3f388ac31eb56fb3cbf9b0b8b#3d1e65acb35a17f3f388ac31eb56fb3cbf9b0b8b"
 dependencies = [
  "bitvec",
  "phf",
@@ -10782,7 +10782,7 @@ dependencies = [
 [[package]]
 name = "revm-primitives"
 version = "23.0.0"
-source = "git+https://github.com/weiihann/revm?rev=530c04490021820932bba7deb816cd80258ea3c9#530c04490021820932bba7deb816cd80258ea3c9"
+source = "git+https://github.com/weiihann/revm?rev=3d1e65acb35a17f3f388ac31eb56fb3cbf9b0b8b#3d1e65acb35a17f3f388ac31eb56fb3cbf9b0b8b"
 dependencies = [
  "alloy-primitives",
  "num_enum",
@@ -10793,7 +10793,7 @@ dependencies = [
 [[package]]
 name = "revm-state"
 version = "11.0.1"
-source = "git+https://github.com/weiihann/revm?rev=530c04490021820932bba7deb816cd80258ea3c9#530c04490021820932bba7deb816cd80258ea3c9"
+source = "git+https://github.com/weiihann/revm?rev=3d1e65acb35a17f3f388ac31eb56fb3cbf9b0b8b#3d1e65acb35a17f3f388ac31eb56fb3cbf9b0b8b"
 dependencies = [
  "alloy-eip7928",
  "bitflags 2.11.1",
