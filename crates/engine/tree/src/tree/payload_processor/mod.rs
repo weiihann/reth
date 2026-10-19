@@ -1263,6 +1263,7 @@ mod tests {
                         code_hash: KECCAK_EMPTY,
                         code: Some(Default::default()),
                         account_id: None,
+                        code_size: None,
                     },
                     original_info: Box::new(AccountInfo::default()),
                     storage,

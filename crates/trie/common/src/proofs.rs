@@ -248,6 +248,7 @@ impl MultiProof {
                     balance: account.balance,
                     nonce: account.nonce,
                     bytecode_hash: (account.code_hash != KECCAK_EMPTY).then_some(account.code_hash),
+                    code_size: 0,
                 })
             }
             None
@@ -377,6 +378,7 @@ impl DecodedMultiProof {
                     balance: account.balance,
                     nonce: account.nonce,
                     bytecode_hash: (account.code_hash != KECCAK_EMPTY).then_some(account.code_hash),
+                    code_size: 0,
                 })
             }
             None
@@ -775,7 +777,10 @@ impl AccountProof {
             // verification.
             (EMPTY_ROOT_HASH, None)
         } else {
-            (storage_hash, Some(Account { nonce, balance, bytecode_hash: code_hash.into() }))
+            (
+                storage_hash,
+                Some(Account { nonce, balance, bytecode_hash: code_hash.into(), code_size: 0 }),
+            )
         };
 
         Self { address, info, proof: account_proof, storage_root, storage_proofs }
@@ -1189,7 +1194,12 @@ mod tests {
             address: Address::random(),
             info: Some(
                 // non-empty account
-                Account { nonce: 100, balance: U256::ZERO, bytecode_hash: Some(KECCAK_EMPTY) },
+                Account {
+                    nonce: 100,
+                    balance: U256::ZERO,
+                    bytecode_hash: Some(KECCAK_EMPTY),
+                    code_size: 0,
+                },
             ),
             proof: vec![],
             storage_root: B256::ZERO,

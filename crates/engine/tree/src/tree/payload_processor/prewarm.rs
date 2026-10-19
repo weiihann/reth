@@ -734,6 +734,7 @@ where
                     .and_then(|account| account.bytecode_hash)
                     .or(Some(alloy_consensus::constants::KECCAK_EMPTY))
             }),
+            code_size: 0,
         };
 
         let hashed_address = hashed_address.unwrap_or_else(|| keccak256(address));

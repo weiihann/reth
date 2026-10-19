@@ -1066,6 +1066,7 @@ impl<P: Clone, Node: NodeTypes, N> RpcBlockchainStateProvider<P, Node, N> {
                 balance: account_info.balance,
                 nonce: account_info.nonce,
                 bytecode_hash,
+                code_size: 0,
             }))
         }
     }

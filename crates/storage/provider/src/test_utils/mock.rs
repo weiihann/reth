@@ -235,7 +235,7 @@ impl ExtendedAccount {
     /// Create new instance of extended account
     pub fn new(nonce: u64, balance: U256) -> Self {
         Self {
-            account: Account { nonce, balance, bytecode_hash: None },
+            account: Account { nonce, balance, bytecode_hash: None, code_size: 0 },
             bytecode: None,
             storage: Default::default(),
         }
@@ -245,6 +245,7 @@ impl ExtendedAccount {
     pub fn with_bytecode(mut self, bytecode: Bytes) -> Self {
         let hash = keccak256(&bytecode);
         self.account.bytecode_hash = Some(hash);
+        self.account.code_size = bytecode.len() as u64;
         self.bytecode = Some(Bytecode::new_raw(bytecode));
         self
     }

@@ -1931,6 +1931,7 @@ mod tests {
             nonce: 1,
             balance: U256::from(1000),
             bytecode_hash: None,
+            code_size: 0,
         };
         let slot = U256::from(0x42);
         let slot_b256 = B256::from(slot);
@@ -2016,6 +2017,7 @@ mod tests {
             nonce: 1,
             balance: U256::from(1000),
             bytecode_hash: None,
+            code_size: 0,
         };
         let slot = U256::from(0x42);
 
@@ -2115,6 +2117,7 @@ mod tests {
             nonce: 1,
             balance: U256::from(1000),
             bytecode_hash: None,
+            code_size: 0,
         };
         let slot = U256::from(0x42);
 

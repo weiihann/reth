@@ -914,7 +914,7 @@ mod tests {
         let mut hashed_state = HashedPostState::default();
         hashed_state.accounts.insert(
             address,
-            Some(Account { balance: U256::from(100), nonce: 1, bytecode_hash: None }),
+            Some(Account { balance: U256::from(100), nonce: 1, bytecode_hash: None, code_size: 0 }),
         );
         let mut storage = reth_trie::HashedStorage::new(false);
         storage.storage.insert(slot, value);
@@ -969,6 +969,7 @@ mod tests {
             nonce: 7,
             balance: U256::from(42),
             bytecode_hash: Some(B256::from([0xAA; 32])),
+            code_size: 0,
         });
         let mut account_rlp_buf = vec![0x00, 0x01];
 

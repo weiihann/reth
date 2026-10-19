@@ -942,6 +942,7 @@ mod tests {
             code_hash: B256::ZERO,
             code: None,
             account_id: None,
+            code_size: None,
         };
         let account_info2 = AccountInfo {
             nonce: 2,
@@ -949,6 +950,7 @@ mod tests {
             code_hash: B256::ZERO,
             code: None,
             account_id: None,
+            code_size: None,
         };
 
         // Set up the bundle state with these accounts

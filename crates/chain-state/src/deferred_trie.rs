@@ -570,12 +570,18 @@ mod tests {
         let key = B256::with_last_byte(1);
         // Oldest ancestor sets nonce to 1
         let oldest_state = HashedPostStateSorted::new(
-            vec![(key, Some(Account { nonce: 1, balance: U256::ZERO, bytecode_hash: None }))],
+            vec![(
+                key,
+                Some(Account { nonce: 1, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
+            )],
             B256Map::default(),
         );
         // Newest ancestor overwrites nonce to 2
         let newest_state = HashedPostStateSorted::new(
-            vec![(key, Some(Account { nonce: 2, balance: U256::ZERO, bytecode_hash: None }))],
+            vec![(
+                key,
+                Some(Account { nonce: 2, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
+            )],
             B256Map::default(),
         );
 
@@ -630,7 +636,7 @@ mod tests {
     fn first_block_after_anchor_creates_empty_base() {
         let anchor = B256::with_last_byte(1);
         let key = B256::with_last_byte(42);
-        let account = Account { nonce: 1, balance: U256::ZERO, bytecode_hash: None };
+        let account = Account { nonce: 1, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
 
         // First block after anchor - no ancestors
         let first_block = DeferredTrieData::pending(
@@ -656,7 +662,8 @@ mod tests {
     fn reuses_parent_overlay() {
         let anchor = B256::with_last_byte(1);
         let key = B256::with_last_byte(42);
-        let account = Account { nonce: 100, balance: U256::ZERO, bytecode_hash: None };
+        let account =
+            Account { nonce: 100, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
 
         // Create parent with anchored trie input
         let parent = ready_block_with_state(anchor, vec![(key, Some(account))]);
@@ -688,7 +695,7 @@ mod tests {
         let old_anchor = B256::with_last_byte(1);
         let new_anchor = B256::with_last_byte(2);
         let key = B256::with_last_byte(42);
-        let account = Account { nonce: 50, balance: U256::ZERO, bytecode_hash: None };
+        let account = Account { nonce: 50, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
 
         // Create parent with OLD anchor
         let parent = ready_block_with_state(old_anchor, vec![(key, Some(account))]);
@@ -724,7 +731,7 @@ mod tests {
     fn rebuilds_when_parent_has_no_anchored_input() {
         let anchor = B256::with_last_byte(1);
         let key = B256::with_last_byte(42);
-        let account = Account { nonce: 25, balance: U256::ZERO, bytecode_hash: None };
+        let account = Account { nonce: 25, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
 
         // Create parent WITHOUT anchored trie input (e.g., from without_trie_input constructor)
         let parent_state =
@@ -762,13 +769,16 @@ mod tests {
         // Block 1: sets account at key1
         let block1 = ready_block_with_state(
             anchor,
-            vec![(key1, Some(Account { nonce: 1, balance: U256::ZERO, bytecode_hash: None }))],
+            vec![(
+                key1,
+                Some(Account { nonce: 1, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
+            )],
         );
 
         // Block 2: adds account at key2, ancestor is block1
         let block2_hashed = HashedPostState::default().with_accounts([(
             key2,
-            Some(Account { nonce: 2, balance: U256::ZERO, bytecode_hash: None }),
+            Some(Account { nonce: 2, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
         )]);
         let block2 = DeferredTrieData::pending(
             Arc::new(block2_hashed),
@@ -783,7 +793,7 @@ mod tests {
         // Block 3: adds account at key3, ancestor is block2 (which includes block1)
         let block3_hashed = HashedPostState::default().with_accounts([(
             key3,
-            Some(Account { nonce: 3, balance: U256::ZERO, bytecode_hash: None }),
+            Some(Account { nonce: 3, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
         )]);
         let block3 = DeferredTrieData::pending(
             Arc::new(block3_hashed),
@@ -814,13 +824,16 @@ mod tests {
         // Parent sets nonce to 10
         let parent = ready_block_with_state(
             anchor,
-            vec![(key, Some(Account { nonce: 10, balance: U256::ZERO, bytecode_hash: None }))],
+            vec![(
+                key,
+                Some(Account { nonce: 10, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
+            )],
         );
 
         // Child overwrites nonce to 99
         let child_hashed = HashedPostState::default().with_accounts([(
             key,
-            Some(Account { nonce: 99, balance: U256::ZERO, bytecode_hash: None }),
+            Some(Account { nonce: 99, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
         )]);
         let child = DeferredTrieData::pending(
             Arc::new(child_hashed),
@@ -852,7 +865,8 @@ mod tests {
 
         for i in 0..num_blocks {
             let key = B256::with_last_byte(i as u8);
-            let account = Account { nonce: i as u64, balance: U256::ZERO, bytecode_hash: None };
+            let account =
+                Account { nonce: i as u64, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
             let hashed = HashedPostState::default().with_accounts([(key, Some(account))]);
 
             let block = DeferredTrieData::pending(
@@ -900,12 +914,15 @@ mod tests {
         // Build a chain of 3 blocks with old_anchor
         let block1 = ready_block_with_state(
             old_anchor,
-            vec![(key1, Some(Account { nonce: 1, balance: U256::ZERO, bytecode_hash: None }))],
+            vec![(
+                key1,
+                Some(Account { nonce: 1, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
+            )],
         );
 
         let block2_hashed = HashedPostState::default().with_accounts([(
             key2,
-            Some(Account { nonce: 2, balance: U256::ZERO, bytecode_hash: None }),
+            Some(Account { nonce: 2, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
         )]);
         let block2 = DeferredTrieData::pending(
             Arc::new(block2_hashed),
@@ -917,7 +934,7 @@ mod tests {
 
         let block3_hashed = HashedPostState::default().with_accounts([(
             key3,
-            Some(Account { nonce: 3, balance: U256::ZERO, bytecode_hash: None }),
+            Some(Account { nonce: 3, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
         )]);
         let block3 = DeferredTrieData::pending(
             Arc::new(block3_hashed),
@@ -939,7 +956,7 @@ mod tests {
         // but the anchor check forces a rebuild (e.g. artificial anchor change).
         let block4_hashed = HashedPostState::default().with_accounts([(
             key4,
-            Some(Account { nonce: 4, balance: U256::ZERO, bytecode_hash: None }),
+            Some(Account { nonce: 4, balance: U256::ZERO, bytecode_hash: None, code_size: 0 }),
         )]);
         let block4 = DeferredTrieData::pending(
             Arc::new(block4_hashed),

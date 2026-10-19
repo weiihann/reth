@@ -1159,6 +1159,7 @@ mod tests {
             code_hash: B256::random(),
             code: Some(Bytecode::new_raw(Bytes::from(vec![1, 2]))),
             account_id: None,
+            code_size: None,
         };
 
         let mut storage = StorageWithOriginalValues::default();
@@ -1204,6 +1205,7 @@ mod tests {
             code_hash: B256::random(),
             code: None,
             account_id: None,
+            code_size: None,
         };
 
         // Create hashed accounts with addresses.
@@ -1812,7 +1814,15 @@ mod tests {
 
         let state = HashedPostState {
             accounts: B256Map::from_iter([
-                (addr1, Some(Account { nonce: 1, balance: U256::from(100), bytecode_hash: None })),
+                (
+                    addr1,
+                    Some(Account {
+                        nonce: 1,
+                        balance: U256::from(100),
+                        bytecode_hash: None,
+                        code_size: 0,
+                    }),
+                ),
                 (addr2, None),
                 (addr3, Some(Account::default())),
             ]),

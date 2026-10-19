@@ -1029,13 +1029,17 @@ mod tests {
         )
         .unwrap();
 
-        let acc_plain = Account { nonce: 100, balance: U256::ZERO, bytecode_hash: None };
-        let acc_at15 = Account { nonce: 15, balance: U256::ZERO, bytecode_hash: None };
-        let acc_at10 = Account { nonce: 10, balance: U256::ZERO, bytecode_hash: None };
-        let acc_at7 = Account { nonce: 7, balance: U256::ZERO, bytecode_hash: None };
-        let acc_at3 = Account { nonce: 3, balance: U256::ZERO, bytecode_hash: None };
+        let acc_plain =
+            Account { nonce: 100, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
+        let acc_at15 =
+            Account { nonce: 15, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
+        let acc_at10 =
+            Account { nonce: 10, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
+        let acc_at7 = Account { nonce: 7, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
+        let acc_at3 = Account { nonce: 3, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
 
-        let higher_acc_plain = Account { nonce: 4, balance: U256::ZERO, bytecode_hash: None };
+        let higher_acc_plain =
+            Account { nonce: 4, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
 
         // setup
         tx.put::<tables::AccountChangeSets>(1, AccountBeforeTx { address: ADDRESS, info: None })
@@ -1414,9 +1418,11 @@ mod tests {
 
         let slot = U256::from_be_bytes(*STORAGE);
         let account: revm_state::AccountInfo =
-            Account { nonce: 1, balance: U256::from(1000), bytecode_hash: None }.into();
+            Account { nonce: 1, balance: U256::from(1000), bytecode_hash: None, code_size: 0 }
+                .into();
         let higher_account: revm_state::AccountInfo =
-            Account { nonce: 1, balance: U256::from(2000), bytecode_hash: None }.into();
+            Account { nonce: 1, balance: U256::from(2000), bytecode_hash: None, code_size: 0 }
+                .into();
 
         let mut rng = generators::rng();
         let blocks = random_block_range(
@@ -1483,14 +1489,14 @@ mod tests {
             .tx_ref()
             .put::<tables::HashedAccounts>(
                 hashed_address,
-                Account { nonce: 1, balance: U256::from(1000), bytecode_hash: None },
+                Account { nonce: 1, balance: U256::from(1000), bytecode_hash: None, code_size: 0 },
             )
             .unwrap();
         provider_rw
             .tx_ref()
             .put::<tables::HashedAccounts>(
                 hashed_higher_address,
-                Account { nonce: 1, balance: U256::from(2000), bytecode_hash: None },
+                Account { nonce: 1, balance: U256::from(2000), bytecode_hash: None, code_size: 0 },
             )
             .unwrap();
         provider_rw.commit().unwrap();
@@ -1613,8 +1619,9 @@ mod tests {
         .unwrap();
 
         // Changesets for ADDRESS
-        let acc_at7 = Account { nonce: 7, balance: U256::ZERO, bytecode_hash: None };
-        let acc_at10 = Account { nonce: 10, balance: U256::ZERO, bytecode_hash: None };
+        let acc_at7 = Account { nonce: 7, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
+        let acc_at10 =
+            Account { nonce: 10, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
         tx.put::<tables::AccountChangeSets>(
             7,
             AccountBeforeTx { address: ADDRESS, info: Some(acc_at7) },
@@ -1627,8 +1634,10 @@ mod tests {
         .unwrap();
 
         // PlainState
-        let acc_plain = Account { nonce: 100, balance: U256::ZERO, bytecode_hash: None };
-        let no_hist_plain = Account { nonce: 999, balance: U256::from(999), bytecode_hash: None };
+        let acc_plain =
+            Account { nonce: 100, balance: U256::ZERO, bytecode_hash: None, code_size: 0 };
+        let no_hist_plain =
+            Account { nonce: 999, balance: U256::from(999), bytecode_hash: None, code_size: 0 };
         tx.put::<tables::PlainAccountState>(ADDRESS, acc_plain).unwrap();
         tx.put::<tables::PlainAccountState>(no_history_addr, no_hist_plain).unwrap();
         tx.commit().unwrap();
