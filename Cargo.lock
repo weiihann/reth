@@ -3470,7 +3470,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "39cab71617ae0d63f51a36d69f866391735b51691dbda63cf6f96d042b63efeb"
 dependencies = [
  "libc",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -5133,7 +5133,7 @@ checksum = "3640c1c38b8e4e43584d8df18be5fc6b0aa314ce6ebf51b53313d4306cca8e46"
 dependencies = [
  "hermit-abi",
  "libc",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -6125,7 +6125,7 @@ version = "0.50.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7957b9740744892f114936ab4a57b3f487491bbeafaf8083688b16841a4240e5"
 dependencies = [
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -7030,7 +7030,7 @@ dependencies = [
  "once_cell",
  "socket2",
  "tracing",
- "windows-sys 0.59.0",
+ "windows-sys 0.60.2",
 ]
 
 [[package]]
@@ -7784,7 +7784,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs"
 version = "0.3.1"
-source = "git+https://github.com/bnb-chain/reth-core.git?branch=v0.3.1-v2#2b45bde5fcf8a0f5acec927d568ffb934b179dc4"
+source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
 dependencies = [
  "alloy-consensus",
  "alloy-eips 2.0.4",
@@ -7804,7 +7804,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs-derive"
 version = "0.3.1"
-source = "git+https://github.com/bnb-chain/reth-core.git?branch=v0.3.1-v2#2b45bde5fcf8a0f5acec927d568ffb934b179dc4"
+source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -9501,7 +9501,7 @@ dependencies = [
 [[package]]
 name = "reth-primitives-traits"
 version = "0.3.1"
-source = "git+https://github.com/bnb-chain/reth-core.git?branch=v0.3.1-v2#2b45bde5fcf8a0f5acec927d568ffb934b179dc4"
+source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
 dependencies = [
  "alloy-consensus",
  "alloy-eips 2.0.4",
@@ -10051,7 +10051,7 @@ dependencies = [
 [[package]]
 name = "reth-rpc-traits"
 version = "0.3.1"
-source = "git+https://github.com/bnb-chain/reth-core.git?branch=v0.3.1-v2#2b45bde5fcf8a0f5acec927d568ffb934b179dc4"
+source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
 dependencies = [
  "alloy-consensus",
  "alloy-network",
@@ -10587,7 +10587,7 @@ dependencies = [
 [[package]]
 name = "reth-zstd-compressors"
 version = "0.3.1"
-source = "git+https://github.com/bnb-chain/reth-core.git?branch=v0.3.1-v2#2b45bde5fcf8a0f5acec927d568ffb934b179dc4"
+source = "git+https://github.com/weiihann/reth-core.git?rev=27a305c93295ee7c1b3347578d1b7ad5e1ce55b2#27a305c93295ee7c1b3347578d1b7ad5e1ce55b2"
 dependencies = [
  "zstd",
 ]
@@ -10614,8 +10614,7 @@ dependencies = [
 [[package]]
 name = "revm-bytecode"
 version = "10.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bdbb3a3d735efa94c91f2ef6bf20a35f99a77bc78f3e25bd758336901bdf9661"
+source = "git+https://github.com/weiihann/revm?rev=530c04490021820932bba7deb816cd80258ea3c9#530c04490021820932bba7deb816cd80258ea3c9"
 dependencies = [
  "bitvec",
  "phf",
@@ -10783,8 +10782,7 @@ dependencies = [
 [[package]]
 name = "revm-primitives"
 version = "23.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c99bda77d9661521ba0b4bc04558c6692074f01e65dd420fa3b893033d9b8a2"
+source = "git+https://github.com/weiihann/revm?rev=530c04490021820932bba7deb816cd80258ea3c9#530c04490021820932bba7deb816cd80258ea3c9"
 dependencies = [
  "alloy-primitives",
  "num_enum",
@@ -10795,8 +10793,7 @@ dependencies = [
 [[package]]
 name = "revm-state"
 version = "11.0.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c32490ed687dba31c3c882beb8c20408bdd30ef96690d8f145b0ee9a87040bfe"
+source = "git+https://github.com/weiihann/revm?rev=530c04490021820932bba7deb816cd80258ea3c9#530c04490021820932bba7deb816cd80258ea3c9"
 dependencies = [
  "alloy-eip7928",
  "bitflags 2.11.1",
@@ -11081,7 +11078,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -11161,7 +11158,7 @@ dependencies = [
  "security-framework",
  "security-framework-sys",
  "webpki-root-certs 1.0.7",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -11965,7 +11962,7 @@ dependencies = [
  "getrandom 0.4.2",
  "once_cell",
  "rustix",
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -13240,7 +13237,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.59.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]

@@ -714,3 +714,18 @@ reth-metrics = { path = "crates/metrics" }
 
 [patch."https://github.com/bnb-chain/reth.git"]
 reth-metrics = { path = "crates/metrics" }
+
+# Account code size: `AccountInfo::code_size` from weiihann/revm and
+# `Account::code_size` from weiihann/reth-core. The three revm crates move
+# together, and so do the five reth-core crates, so no type is split.
+[patch.crates-io]
+revm-state = { git = "https://github.com/weiihann/revm", rev = "530c04490021820932bba7deb816cd80258ea3c9" }
+revm-bytecode = { git = "https://github.com/weiihann/revm", rev = "530c04490021820932bba7deb816cd80258ea3c9" }
+revm-primitives = { git = "https://github.com/weiihann/revm", rev = "530c04490021820932bba7deb816cd80258ea3c9" }
+
+[patch."https://github.com/bnb-chain/reth-core.git"]
+reth-codecs = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
+reth-codecs-derive = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
+reth-primitives-traits = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
+reth-rpc-traits = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
+reth-zstd-compressors = { git = "https://github.com/weiihann/reth-core.git", rev = "27a305c93295ee7c1b3347578d1b7ad5e1ce55b2" }
